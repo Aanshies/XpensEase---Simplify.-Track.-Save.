@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f8f9fa;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 50px;
+            background-color: rgba(0, 0, 0, 0.6);
+            position: relative;
+            z-index: 2;
+        }
+
+        .logo img {
+            width: 200px;
+            height: auto;
+            cursor: pointer;
+        }
+
+        p {
+            text-align: center;          
+            color: #1a6d55;             
+            font-weight: bold;           
+            font-size: 32px;            
+            margin-top: 30px;           
+            margin-bottom: 10px;         
+        }
+
+        .container {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            margin-top: 40px;            
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            flex: 1;
+            margin: 0 10px;
+        }
+
+        .card h2 {
+            margin: 0 0 10px;
+            font-size: 24px;
+            color: #2e86c1;
+        }
+
+        #progressBars {
+            display: flex;
+            flex-direction: column;
+            gap: 20px; /* Add equal spacing between each progress bar */
+        }
+
+        .progress-bar {
+            height: 10px;
+            border-radius: 5px;
+            background-color: #e9ecef;
+            overflow: hidden;
+            margin-top: 10px;
+            width: 100%;
+        }
+
+        .progress {
+            height: 100%;
+            background-color: #2e86c1;
+            width: 0%; /* Initially set to 0% */
+        }
+
+        .chart-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .chart-box {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        canvas {
+            max-width: 400px;
+            max-height: 400px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #2e86c1;
+            color: white;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #2e86c1;
+            border: none;
+            border-radius: 5px;
+            color: white;
+        }
+
+        button:hover {
+            background-color: #F39C12;
+        }
+    
+        /* Footer */
+        #footer {
+            background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);
+        }
+
+        #footer .footer {
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding-top: 30px; /* Reduced padding for tighter layout */
+            padding-bottom: 20px; /* Adjust padding for cleaner look */
+        }
+
+        #footer .brand h2 {
+            color: white;
+            font-size: 2rem; /* Reduced font size for better spacing */
+            font-weight: 400; 
+            text-align: center;
+            margin: 10px 0; /* Reduced margin for spacing control */
+        }
+
+        #footer .brand h2 span {
+            color: #00bcd4; /* Accent color */
+        }
+
+        #footer h3 {
+            color: white;
+            font-weight: 500;
+            font-size: 1.5rem; /* Adjusted font size */
+            letter-spacing: 0.1rem;
+            margin: 5px 0; /* Reduced margin for tighter layout */
+        }
+
+        #footer .social-icon {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px; /* Reduced spacing between icons and footer text */
+        }
+
+        #footer .social-item {
+            height: 50px;
+            width: 50px;
+            margin: 0 10px;
+        }
+
+        #footer .social-item img {
+            filter: grayscale(1);
+            transition: 0.3s ease filter;
+            width: 100%; /* Ensure images fill their container */
+            height: 100%;
+            object-fit: contain; /* Maintain image proportions */
+        }
+
+        #footer .social-item:hover img {
+            filter: grayscale(0);
+        }
+
+        #footer p {
+            color: white;
+            font-size: 1rem; /* Reduced font size for tighter layout */
+            text-align: center;
+            margin-top: 10px; /* Reduced margin for better spacing */
+        }
+  
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header>
+        <a href="home.html" >
+        <div class="logo"><img src="assets/Images/Logo.png" alt=""></div>
+        </a>
+    </header>
+    <p>ExpenseTracker</p>
+    <div class="container">
+        <div class="card">
+            <h2>Expense Details</h2>
+            <table>
+                <tr>
+                    <th>Category</th>
+                    <th>Amount (₹)</th>
+                </tr>
+                <tr>
+                    <td>Food</td>
+                    <td><input type="number" id="foodAmount" value=""></td>
+                </tr>
+                <tr>
+                    <td>Entertainment</td>
+                    <td><input type="number" id="entertainmentAmount" value=""></td>
+                </tr>
+                <tr>
+                    <td>Business</td>
+                    <td><input type="number" id="businessAmount" value=""></td>
+                </tr>
+                <tr>
+                    <td>Rent</td>
+                    <td><input type="number" id="rentAmount" value=""></td>
+                </tr>
+                <tr>
+                    <td>EMI</td>
+                    <td><input type="number" id="emiAmount" value=""></td>
+                </tr>
+                <tr>
+                    <td>Other</td>
+                    <td><input type="number" id="otherAmount" value=""></td>
+                </tr>
+            </table>
+            <div style="margin-top: 20px; text-align: center;">
+                <button onclick="updateExpenses()">Submit Expenses</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Expense Progress</h2>
+            <div id="progressBars">
+                <div class="progress-item">
+                    <span>Food</span>
+                    <div class="progress-bar"><div class="progress" id="foodProgress"></div></div>
+                </div>
+                <div class="progress-item">
+                    <span>Entertainment</span>
+                    <div class="progress-bar"><div class="progress" id="entertainmentProgress"></div></div>
+                </div>
+                <div class="progress-item">
+                    <span>Business</span>
+                    <div class="progress-bar"><div class="progress" id="businessProgress"></div></div>
+                </div>
+                <div class="progress-item">
+                    <span>Rent</span>
+                    <div class="progress-bar"><div class="progress" id="rentProgress"></div></div>
+                </div>
+                <div class="progress-item">
+                    <span>EMI</span>
+                    <div class="progress-bar"><div class="progress" id="emiProgress"></div></div>
+                </div>
+                <div class="progress-item">
+                    <span>Other</span>
+                    <div class="progress-bar"><div class="progress" id="otherProgress"></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="chart-container">
+        <div class="chart-box">
+            <canvas id="expenseChart"></canvas>
+        </div>
+
+        <div class="chart-box">
+            <canvas id="expenseBarChart"></canvas>
+        </div>
+
+        <div class="chart-box">
+            <canvas id="expenseLineChart"></canvas>
+        </div>
+    </div>
+
+  <!-- Footer -->
+  <section id="footer">
+    <div class="footer container">
+        <div class="brand">
+            <h2><span>X</span>PENS <span>E</span>ASE</h2>
+            <h3>Simplify-Track-Save</h3>
+        </div>
+        <div class="social-icon">
+            <div class="social-item">
+                <a href="#"><img src="https://img.icons8.com/bubbles/100/000000/facebook-new.png" alt="Facebook" /></a>
+            </div>
+            <div class="social-item">
+                <a href="#"><img src="https://img.icons8.com/bubbles/100/000000/instagram-new.png" alt="Instagram" /></a>
+            </div>
+            <div class="social-item">
+                <a href="#"><img src="https://img.icons8.com/bubbles/100/000000/x.png" alt="Twitter" /></a>
+            </div>
+            <div class="social-item">
+                <a href="#"><img src="https://img.icons8.com/bubbles/100/000000/behance.png" alt="Behance" /></a>
+            </div>
+        </div>
+        <p>Copyright © 2025 XpensEase. All rights reserved</p>
+    </div>
+</section>
+<!-- End Footer -->
+
+    <script>
+        let expenseChart, expenseBarChart, expenseLineChart;
+
+        function updateExpenses() {
+            const categories = ['food', 'entertainment', 'business', 'rent', 'emi', 'other'];
+            const categoryMax = { 
+                food: 1000, 
+                entertainment: 800, 
+                business: 1200, 
+                rent: 5000, 
+                emi: 3000, 
+                other: 700 
+            };
+            const categoryColors = ['pink', 'plum', 'orange', 'blue', 'yellow', 'palegreen'];
+            const data = [];
+
+            categories.forEach((category, index) => {
+                const amount = parseFloat(document.getElementById(`${category}Amount`).value) || 0;
+                data.push(amount);
+
+                const progress = Math.min((amount / categoryMax[category]) * 100, 100); // Calculate percentage progress
+                const progressElement = document.getElementById(`${category}Progress`);
+                progressElement.style.width = `${progress}%`; // Update progress width dynamically
+
+                // Add CSS transition for smooth width change
+                progressElement.style.transition = "width 0.5s ease-in-out";
+            });
+
+            const ctx = document.getElementById('expenseChart').getContext('2d');
+            if (expenseChart) {
+                expenseChart.destroy(); // Destroy previous chart to update
+            }
+
+            expenseChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Food', 'Entertainment', 'Business', 'Rent', 'EMI', 'Other'],
+                    datasets: [{
+                        data: data,
+                        backgroundColor: categoryColors,
+                    }]
+                },
+                options: {
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(tooltipItem) {
+                                    const percentage = ((tooltipItem.raw / data.reduce((a, b) => a + b, 0)) * 100).toFixed(2);
+                                    return `${tooltipItem.label}: ₹${tooltipItem.raw} (${percentage}%)`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            const barCtx = document.getElementById('expenseBarChart').getContext('2d');
+            if (expenseBarChart) {
+                expenseBarChart.destroy();
+            }
+
+            expenseBarChart = new Chart(barCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Food', 'Entertainment', 'Business', 'Rent', 'EMI', 'Other'],
+                    datasets: [{
+                        label: 'Amount (₹)',
+                        data: data,
+                        backgroundColor: categoryColors,
+                        borderColor: '#000',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: Math.max(...data) + 1000
+                        }
+                    }
+                }
+            });
+
+            const lineCtx = document.getElementById('expenseLineChart').getContext('2d');
+            if (expenseLineChart) {
+                expenseLineChart.destroy();
+            }
+
+            expenseLineChart = new Chart(lineCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Food', 'Entertainment', 'Business', 'Rent', 'EMI', 'Other'],
+                    datasets: [{
+                        label: 'Expense Trend (₹)',
+                        data: data,
+                        borderColor: '#FF5733',
+                        fill: false,
+                        tension: 0.1
+                    }]
+                },
+                options: {
+                    responsive: true
+                }
+            });
+        }
+    </script>
+
+</body>
+</html>
