@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Expense Tracker Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f3f4f6;
+    }
+    .container {
+      display: flex;
+    }
+    .sidebar {
+      width: 250px;
+      background: linear-gradient(180deg, #1e293b, #0f172a);
+      color: white;
+      min-height: 100vh;
+      padding: 2rem 1rem;
+    }
+    .sidebar h2 {
+      margin-bottom: 2rem;
+      color: #3b82f6;
+    }
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+    }
+    .sidebar li {
+      margin: 1rem 0;
+      padding: 0.5rem 1rem;
+      border-radius: 12px;
+      cursor: pointer;
+    }
+    .sidebar li:hover {
+      background-color: #334155;
+    }
+    .main {
+      flex-grow: 1;
+      padding: 2rem;
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .header input {
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 8px;
+      width: 300px;
+    }
+    .cards {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2rem;
+      flex-wrap: wrap;
+    }
+    .card {
+      flex: 1;
+      min-width: 220px;
+      background: white;
+      padding: 1rem;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+    .charts {
+      display: flex;
+      gap: 2rem;
+      margin-top: 2rem;
+      flex-wrap: wrap;
+    }
+    .chart-card {
+      background: white;
+      border-radius: 16px;
+      padding: 1rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      flex: 1;
+      min-width: 300px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <h2>ExpenseX</h2>
+      <ul>
+        <li>Dashboard</li>
+        <li>Transactions</li>
+        <li>Budgets</li>
+        <li>Categories</li>
+        <li>Reports</li>
+        <li>Settings</li>
+      </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main">
+      <div class="header">
+        <h1>Dashboard</h1>
+        <input type="text" placeholder="Search..." />
+      </div>
+
+      <!-- Summary Cards -->
+      <div class="cards">
+        <div class="card">
+          <h3>Total Income</h3>
+          <p><strong>₹75,000</strong></p>
+        </div>
+        <div class="card">
+          <h3>Total Expenses</h3>
+          <p><strong>₹60,000</strong></p>
+        </div>
+        <div class="card">
+          <h3>Savings</h3>
+          <p><strong>₹15,000</strong></p>
+        </div>
+      </div>
+
+      <!-- Charts Section -->
+      <div class="charts">
+        <!-- Monthly Expenses Bar Chart -->
+        <div class="chart-card">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h3>Monthly Expenses</h3>
+            <span style="background-color: #ede9fe; padding: 4px 12px; border-radius: 12px; font-size: 0.8rem;">Nov, 2023</span>
+          </div>
+          <canvas id="expenseChart" height="200"></canvas>
+        </div>
+
+        <!-- Budget Usage Doughnut Chart -->
+        <div class="chart-card" style="max-width: 300px;">
+          <h3>Budget Usage</h3>
+          <canvas id="budgetChart" height="200"></canvas>
+          <div style="text-align: center; margin-top: 0.5rem;">
+            <strong>80% of Monthly Budget Used</strong><br/>
+            <small>Track remaining amount and control overspending</small>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Chart JS -->
+  <script>
+    // Bar Chart for Expenses
+    const ctxExpense = document.getElementById('expenseChart').getContext('2d');
+    new Chart(ctxExpense, {
+      type: 'bar',
+      data: {
+        labels: ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan'],
+        datasets: [
+          {
+            label: 'Expenses (₹)',
+            data: [4200, 5300, 4800, 6000, 4500, 5200, 4700, 5000, 5500, 6800, 6100, 4900],
+            backgroundColor: [
+              '#f97316', '#f43f5e', '#8b5cf6', '#10b981', '#eab308', '#6366f1',
+              '#14b8a6', '#ef4444', '#22c55e', '#a855f7', '#ec4899', '#3b82f6'
+            ],
+            borderRadius: 12
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        plugins: { legend: { display: false } },
+        scales: {
+          y: {
+            beginAtZero: true,
+            ticks: { stepSize: 1000 }
+          }
+        }
+      }
+    });
+
+    // Doughnut for Budget Usage
+    const ctxBudget = document.getElementById('budgetChart').getContext('2d');
+    new Chart(ctxBudget, {
+      type: 'doughnut',
+      data: {
+        labels: ['Used', 'Remaining'],
+        datasets: [{
+          data: [80, 20],
+          backgroundColor: ['#4f46e5', '#e5e7eb'],
+          borderWidth: 0
+        }]
+      },
+      options: {
+        cutout: '75%',
+        plugins: {
+          legend: { display: false },
+          tooltip: { enabled: false }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

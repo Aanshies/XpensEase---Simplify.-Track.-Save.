@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Voice Expense Tracker with Excel Export</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <link rel="stylesheet" href="styles.css">
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      padding: 20px;
+      text-align: center;
+    }
+    h1.green-text {
+        color: green; /* This makes the title text green */
+      }
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    table {
+      width: 100%;
+      margin: 20px 0;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      padding: 10px;
+      border: 1px solid #ddd;
+    }
+
+    input {
+      width: 100%;
+      padding: 8px;
+      box-sizing: border-box;
+    }
+
+    .button-group {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      padding: 12px 20px;
+      background-color: #4CAF50;
+      border: none;
+      color: white;
+      font-size: 16px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .log {
+      margin-top: 20px;
+      font-style: italic;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+<!-- Header -->
+<header class="header">
+    <div class="logo">
+        <a href="Home.html" onclick="window.location.reload(); return false;">
+            <img src="assets/Images/Logo.png" alt="Logo" />
+        </a>
+    </div>
+    <ul class="menu">
+        <li><a href="#">Home</a></li>
+        <li class="dropdown">
+            <a href="#">Services</a>
+            <ul class="dropdown-menu">
+              <li><a href="expense.html">Dashboard</a></li>
+              <li><a href="budget.html">Budget Planner</a></li>
+              <li><a href="spending.html">Spending Insights</a></li>
+              <li><a href="calender.html">Calendar</a></li>
+              <li><a href="multicurrency.html">Multi-Currency</a></li>
+            </ul>
+          </li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact</a></li>
+        <li><a href="login.html">Login</a></li>
+    </ul>
+</header>
+
+<div class="container">
+    <h1 class="green-text">🎤 TrackIt Talk</h1>
+  <p><strong>Example:</strong> "Add 300 to food"</p>
+
+  <table>
+    <tr><th>Category</th><th>Amount (₹)</th></tr>
+    <tr><td>Food</td><td><input type="number" id="food" value="0"></td></tr>
+    <tr><td>Entertainment</td><td><input type="number" id="entertainment" value="0"></td></tr>
+    <tr><td>Rent</td><td><input type="number" id="rent" value="0"></td></tr>
+    <tr><td>Transport</td><td><input type="number" id="transport" value="0"></td></tr>
+    <tr><td>Other</td><td><input type="number" id="other" value="0"></td></tr>
+  </table>
+
+  <div class="button-group">
+    <button onclick="startListening()">🎙 Start Voice Input</button>
+    <button onclick="downloadExcel()">📥 Save as Excel</button>
+  </div>
+
+  <div class="log" id="logText">Click the button and speak your expense.</div>
+</div>
+
+<div class="footer">
+    <div class="footer-content">
+      <div class="footer-logo">
+          <img src="assets/Images/logo.png" alt="Logo">
+        </div>
+        <nav class="footer-nav">
+          <ul>
+            <li><a href="#">Terms</a></li>
+            <li><a href="#">Copyright</a></li>
+            <li><a href="#">Pricing</a></li>
+            <li><a href="#">Policies</a></li>
+          </ul>
+        </nav>
+    </div>
+</div>
+
+<script>
+  const logText = document.getElementById('logText');
+  const categories = ["food", "entertainment", "rent", "transport", "other"];
+
+  function startListening() {
+    if (!('webkitSpeechRecognition' in window)) {
+      alert("Speech recognition only works in supported browsers like Chrome.");
+      return;
+    }
+
+    const recognition = new webkitSpeechRecognition();
+    recognition.lang = "en-US";
+    recognition.interimResults = false;
+    recognition.maxAlternatives = 1;
+
+    logText.textContent = "Listening...";
+
+    recognition.start();
+
+    recognition.onresult = function(event) {
+      const transcript = event.results[0][0].transcript.toLowerCase();
+      logText.textContent = `Heard: "${transcript}"`;
+
+      const match = transcript.match(/add\s+(\d+)\s+to\s+(\w+)/i);
+      if (match) {
+        const amount = parseFloat(match[1]);
+        const category = match[2].toLowerCase();
+
+        if (categories.includes(category)) {
+          const input = document.getElementById(category);
+          const current = parseFloat(input.value) || 0;
+          input.value = current + amount;
+          logText.textContent += ` → Added ₹${amount} to ${category}`;
+        } else {
+          logText.textContent += " → Category not recognized";
+        }
+      } else {
+        logText.textContent += " → Could not understand the command";
+      }
+    };
+
+    recognition.onerror = function(event) {
+      logText.textContent = "Error: " + event.error;
+    };
+  }
+
+  function downloadExcel() {
+    const data = categories.map(cat => {
+      const amount = parseFloat(document.getElementById(cat).value) || 0;
+      return amount > 0 ? {
+        Category: cat.charAt(0).toUpperCase() + cat.slice(1),
+        Amount: amount
+      } : null;
+    }).filter(Boolean);
+
+    if (data.length === 0) {
+      alert("No expenses to export.");
+      return;
+    }
+
+    const worksheet = XLSX.utils.json_to_sheet(data);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Expenses");
+    XLSX.writeFile(workbook, "My_Expense_Report.xlsx");
+  }
+</script>
+
+</body>
+</html>
