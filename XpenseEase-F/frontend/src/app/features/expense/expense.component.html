@@ -1,0 +1,75 @@
+<header class="header">
+    <div class="logo">
+      <!-- Navigate to home page -->
+      <a routerLink="/home">
+        <img src="/logo.png" alt="Logo" />
+      </a>
+    </div>
+    <ul class="menu">
+      <!-- Home link, using routerLink for Angular routing -->
+      <li><a routerLink="/home" href="#home">Home</a></li>
+      <!-- About link -->
+      <li><a routerLink="/about" href="#about">About</a></li>
+      <!-- Contact link -->
+      <li><a routerLink="/contact" href="#contact">Contact</a></li>
+
+      <li><a routerLink="/report" routerLinkActive="active-link">Dashboard</a></li>
+    </ul>
+</header><br><br><br>
+
+<div class="expense-dashboard">
+    <h2>Expense Tracker Dashboard</h2>
+
+    <div class="expense-container">
+        <!-- Expense Details Container -->
+        <div class="expense-item">
+            <div class="expense-content">
+                <h3>Enter Expense Details</h3>
+                <table>
+                    <tr><th>Category</th><th>Amount (₹)</th></tr>
+                    <tr><td>Food</td><td><input type="number" id="foodAmount"></td></tr>
+                    <tr><td>Entertainment</td><td><input type="number" id="entertainmentAmount"></td></tr>
+                    <tr><td>Business</td><td><input type="number" id="businessAmount"></td></tr>
+                    <tr><td>Rent</td><td><input type="number" id="rentAmount"></td></tr>
+                    <tr><td>EMI</td><td><input type="number" id="emiAmount"></td></tr>
+                    <tr><td>Other</td><td><input type="number" id="otherAmount"></td></tr>
+                </table>
+                <button (click)="updateExpenses()">Update Dashboard</button>
+            </div>
+        </div>
+
+        <!-- Expense Charts Container -->
+        <div class="expense-item">
+            <div class="expense-content">
+                <h3>Expense Charts</h3>
+                <div class="chart-container">
+                    <div class="chart-box">
+                        <!-- Reference to the doughnut chart canvas -->
+                        <canvas #expenseChart></canvas>
+                    </div>
+                    <div class="chart-box">
+                        <!-- Reference to the bar chart canvas -->
+                        <canvas #expenseBarChart></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="footer" id="footer">
+    <div class="footer-content">
+      <div class="footer-logo">
+        <img src="/logo.png" alt="Logo" />
+      </div>
+      <nav class="footer-nav">
+        <ul>
+          <li><a href="#">Terms</a></li>
+          <li><a href="#">Copyright</a></li>
+          <li><a href="#">Pricing</a></li>
+          <li><a href="#">Policies</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>

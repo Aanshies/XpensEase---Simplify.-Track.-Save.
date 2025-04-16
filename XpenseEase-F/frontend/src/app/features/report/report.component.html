@@ -1,0 +1,82 @@
+<div class="dashboard-container">
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h2>Xpense Ease</h2>
+    <nav>
+      <a routerLink="/home" routerLinkActive="active-link">Dashboard</a>
+      <a routerLink="/expense" routerLinkActive="active-link">Expense Tracker</a>
+      <a routerLink="/budget" routerLinkActive="active-link">Budget Planner</a>
+      <a routerLink="/spending" routerLinkActive="active-link">Spending Insights</a>
+      <a routerLink="/calendar" routerLinkActive="active-link">Calendar</a>
+      <a routerLink="/multicurrency" routerLinkActive="active-link">Multi-Currency</a>
+      <a routerLink="/voice" routerLinkActive="active-link">Voice Input</a>
+      <a (click)="openSettings()" class="settings-link">⚙️ Settings</a>
+
+      <button class="logout-btn" (click)="logout()">
+        <span>🚪 Logout</span>
+      </button>
+    </nav>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <h1 class="welcome">Welcome back, {{ userName }}! 🎉</h1>
+
+
+    <!-- Cards -->
+    <div class="cards">
+      <div class="card">
+        <h3>Total Expenses</h3>
+        <p>$1200</p>
+      </div>
+      <div class="card">
+        <h3>Remaining Budget</h3>
+        <p>$500</p>
+      </div>
+      <div class="card">
+        <h3>Upcoming Bill</h3>
+        <p>Electricity - Apr 15</p>
+      </div>
+      <div class="card">
+        <h3>Currency Rate</h3>
+        <p>USD to INR: ₹83.25</p>
+      </div>
+    </div>
+
+    <!-- Charts -->
+    <div class="charts">
+      <div class="chart-box">
+        <canvas id="expenseChart"></canvas>
+      </div>
+      <div class="chart-box">
+        <canvas id="categoryChart"></canvas>
+      </div>
+    </div>
+  </div>
+
+<!-- SETTINGS MODAL -->
+<div class="modal" [class.show]="showSettings">
+  <div class="modal-content">
+    <span class="close" (click)="closeSettings()">&times;</span>
+    <h2>User Settings</h2>
+
+    <label for="username">Username</label>
+    <input type="text" id="username" placeholder="Enter your username" [(ngModel)]="userName" />
+
+    <label for="password">Password</label>
+<div class="password-wrapper">
+  <input
+    [type]="passwordVisible ? 'text' : 'password'"
+    id="password"
+    placeholder="Enter your password"
+    [(ngModel)]="password"
+  />
+  <button type="button" class="eye-btn" (click)="togglePasswordVisibility()">
+    <i class="bi" [ngClass]="passwordVisible ? 'bi-eye-slash' : 'bi-eye'"></i>
+  </button>
+</div>
+
+
+    <button class="save-btn" (click)="saveChanges()">Save Changes</button>
+  </div>
+</div>
