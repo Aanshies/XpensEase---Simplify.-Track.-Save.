@@ -1,0 +1,75 @@
+<header class="header">
+    <div class="logo">
+      <!-- Navigate to home page -->
+      <a routerLink="/home">
+        <img src="/logo.png" alt="Logo" />
+      </a>
+    </div>
+    <ul class="menu">
+      <!-- Home link, using routerLink for Angular routing -->
+      <li><a routerLink="/home" href="#home">Home</a></li>
+      <!-- About link -->
+      <li><a routerLink="/about" href="#about">About</a></li>
+      <!-- Contact link -->
+      <li><a routerLink="/contact" href="#contact">Contact</a></li>
+
+      <li><a routerLink="/report" routerLinkActive="active-link">Dashboard</a></li>
+    </ul>
+</header><br><Br>
+
+
+<section class="container">
+    <div class="balance-container">
+      <h2>Your Balance</h2>
+      <h2>₹{{ remainingBalance.toFixed(2) }}</h2>
+    </div>
+  
+    <div class="inc-exp-container">
+      <div>
+        <h4>Income</h4>
+        <p>₹{{ income.toFixed(2) }}</p>
+      </div>
+      <div>
+        <h4>Remaining</h4>
+        <p>₹{{ remainingBalance.toFixed(2) }}</p>
+      </div>
+    </div>
+  
+    <h6 class="section-heading">Add Income</h6>
+    <form (ngSubmit)="addIncome()">
+      <input type="number" [(ngModel)]="incomeInput" name="income" class="category-input" placeholder="Enter your income" required />
+      <button type="submit" class="category-btn">Add Income</button>
+    </form>
+  
+    <div id="notification" *ngIf="notification">{{ notification }}</div>
+  
+    <h6 class="section-heading">Set your budget categories</h6>
+    <form (ngSubmit)="addCategory()">
+      <input type="text" [(ngModel)]="categoryName" name="categoryName" class="category-input" placeholder="Category name" required />
+      <input type="number" [(ngModel)]="categoryBudget" name="categoryBudget" class="category-input" placeholder="Budget amount" required />
+      <button type="submit" class="category-btn">Add Category</button>
+    </form>
+  
+    <div class="category-container">
+      <div *ngFor="let category of categories" class="category-item">
+        <p>{{ category.name }} - ₹<span>{{ category.budget }}</span></p>
+        <button (click)="removeCategory(category.id)" class="remove-btn">Remove</button>
+      </div>
+    </div>
+  </section>
+  
+  <div class="footer" id="footer">
+    <div class="footer-content">
+      <div class="footer-logo">
+        <img src="/logo.png" alt="Logo" />
+      </div>
+      <nav class="footer-nav">
+        <ul>
+          <li><a href="#">Terms</a></li>
+          <li><a href="#">Copyright</a></li>
+          <li><a href="#">Pricing</a></li>
+          <li><a href="#">Policies</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>

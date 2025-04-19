@@ -1,0 +1,92 @@
+<header class="header">
+    <div class="logo">
+      <!-- Navigate to home page -->
+      <a routerLink="/home">
+        <img src="/logo.png" alt="Logo" />
+      </a>
+    </div>
+    <ul class="menu">
+      <!-- Home link, using routerLink for Angular routing -->
+      <li><a routerLink="/home" href="#home">Home</a></li>
+      <!-- About link -->
+      <li><a routerLink="/about" href="#about">About</a></li>
+      <!-- Contact link -->
+      <li><a routerLink="/contact" href="#contact">Contact</a></li>
+
+      <li><a routerLink="/report" routerLinkActive="active-link">Dashboard</a></li>
+    </ul>
+</header><br><br>
+
+
+
+
+<div class="container">
+    <p>Spending Insights</p>
+  
+    <!-- Form to Add Expense -->
+    <form (submit)="addExpense($event)">
+        <input type="text" [(ngModel)]="expenseName" name="name" placeholder="Expense Name" required pattern="[a-zA-Z\s]*" />
+        <input type="number" [(ngModel)]="expenseAmount" name="amount" placeholder="Amount" required />
+        <select [(ngModel)]="expenseCategory" name="category" required>
+          <option value="" disabled selected>Select Category</option>
+          <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
+        </select>
+        <input type="date" [(ngModel)]="expenseDate" name="date" required />
+        <button type="submit">Add Expense</button>
+      </form>
+      
+    <!-- Expense Table -->
+    <div class="expense-table">
+      <table>
+        <thead>
+          <tr>
+            <th>Expense Name</th>
+            <th>Amount</th>
+            <th>Category</th>
+            <th>Date</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let expense of filteredExpenses">
+            <td>{{ expense.name }}</td>
+            <td>₹{{ expense.amount.toFixed(2) }}</td>
+            <td>{{ expense.category }}</td>
+            <td>{{ expense.date }}</td>
+            <td>
+              <button (click)="editExpense(expense)">Edit</button>
+              <button (click)="deleteExpense(expense.id)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="total-amount">
+        <strong>Total:</strong> ₹{{ getTotalAmount().toFixed(2) }}
+      </div>
+    </div>
+  
+    <!-- Filter by Category -->
+    <div class="filter">
+      <label for="filter">Filter by Category:</label>
+      <select [(ngModel)]="selectedCategory" (change)="filterExpenses()" name="filter">
+        <option value="All">All</option>
+        <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="footer" id="footer">
+    <div class="footer-content">
+      <div class="footer-logo">
+        <img src="/logo.png" alt="Logo" />
+      </div>
+      <nav class="footer-nav">
+        <ul>
+          <li><a href="#">Terms</a></li>
+          <li><a href="#">Copyright</a></li>
+          <li><a href="#">Pricing</a></li>
+          <li><a href="#">Policies</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>

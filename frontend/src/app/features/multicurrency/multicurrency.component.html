@@ -1,0 +1,92 @@
+<header class="header">
+  <div class="logo">
+    <!-- Navigate to home page -->
+    <a routerLink="/home">
+      <img src="/logo.png" alt="Logo" />
+    </a>
+  </div>
+  <ul class="menu">
+    <!-- Home link, using routerLink for Angular routing -->
+    <li><a routerLink="/home" href="#home">Home</a></li>
+    <!-- About link -->
+    <li><a routerLink="/about" href="#about">About</a></li>
+    <!-- Contact link -->
+    <li><a routerLink="/contact" href="#contact">Contact</a></li>
+
+    <li><a routerLink="/report" routerLinkActive="active-link">Dashboard</a></li>
+  </ul>
+</header>
+
+
+<div class="container">
+    <h2>Multi currency</h2>
+  
+    <!-- Budget Input -->
+    <div class="budget-input">
+      <label>Set Monthly Budget:</label>
+      <input type="number" [(ngModel)]="totalBudget" placeholder="Enter budget">
+      <select [(ngModel)]="selectedCurrency" (change)="updateCurrencySymbol()">
+        <option value="USD" data-symbol="$">USD ($)</option>
+        <option value="INR" data-symbol="₹">INR (₹)</option>
+        <option value="EUR" data-symbol="€">EUR (€)</option>
+        <option value="GBP" data-symbol="£">GBP (£)</option>
+      </select>
+      <button (click)="setBudget()">Set</button>
+    </div>
+  
+    <!-- Remaining Budget Display -->
+    <h3>Remaining Budget: <span>{{ currencySymbol }}</span><span>{{ remainingBudget | number: '1.2-2' }}</span></h3>
+  
+    <!-- Progress Bar -->
+    <div class="progress-bar">
+      <div id="progress" class="progress" [style.width]="progressPercentage + '%'"></div>
+    </div>
+  
+    <!-- Alert Message -->
+    <p id="alertMessage">{{ alertMessage }}</p>
+  
+    <!-- Expense Input -->
+    <h3>Add Expense</h3>
+    <input type="number" [(ngModel)]="expenseAmount" placeholder="Enter expense">
+    <select [(ngModel)]="expenseCategory">
+      <option value="Food">Food</option>
+      <option value="Transport">Transport</option>
+      <option value="Shopping">Shopping</option>
+      <option value="Entertainment">Entertainment</option>
+      <option value="Other">Other</option>
+    </select>
+    <button (click)="addExpense()">Add</button>
+  
+    <!-- Expense Table -->
+    <h3>Expense List</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Category</th>
+          <th>Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let expense of expenses">
+          <td>{{ expense.category }}</td>
+          <td>{{ currencySymbol }}{{ expense.amount | number: '1.2-2' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <div class="footer" id="footer">
+    <div class="footer-content">
+      <div class="footer-logo">
+        <img src="/logo.png" alt="Logo" />
+      </div>
+      <nav class="footer-nav">
+        <ul>
+          <li><a href="#">Terms</a></li>
+          <li><a href="#">Copyright</a></li>
+          <li><a href="#">Pricing</a></li>
+          <li><a href="#">Policies</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
