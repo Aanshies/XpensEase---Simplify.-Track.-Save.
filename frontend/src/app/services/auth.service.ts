@@ -3,7 +3,8 @@ import { Injectable } from '@angular/core';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private baseURL = 'http://localhost:3000/api/user';
+  private baseURL = 'https://xpensease-simplify-track-save.onrender.com';
+  //Add your own backend url
 
   constructor(private http: HttpClient) {}
 
