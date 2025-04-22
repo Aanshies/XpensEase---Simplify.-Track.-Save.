@@ -22,21 +22,21 @@
 
 These give a quick visual walkthrough of what XpenseEase offers.
 
-![Image](https://github.com/user-attachments/assets/3f9ec883-0466-4542-8a08-241439739469)
-![Image](https://github.com/user-attachments/assets/88ace269-c4fe-4358-870d-0e7624805352)
-![Image](https://github.com/user-attachments/assets/0c986b22-39e8-4c15-b220-ee658cfc0517)
-![Image](https://github.com/user-attachments/assets/472efbbc-e923-43fa-9123-0d4efe0ca8b3)
-![Image](https://github.com/user-attachments/assets/603b0078-ba3c-4c06-97d8-ec2839d88e57)
-![Image](https://github.com/user-attachments/assets/80070b87-334e-43a3-a2e9-580d66ebb403)
-![Image](https://github.com/user-attachments/assets/62628dfd-65b8-4e89-8e78-a45f44201941)
-![Image](https://github.com/user-attachments/assets/82845473-d4a9-4fce-b7d1-3c410418c1a8)
-![Image](https://github.com/user-attachments/assets/7967969d-f5c5-4849-a281-42450a4627de)
-![Image](https://github.com/user-attachments/assets/d990a9c2-17f7-4ead-b725-b00b0e03fe43)
-![Image](https://github.com/user-attachments/assets/e16be9c3-8a98-4656-ab8d-64d82b04b796)
-![Image](https://github.com/user-attachments/assets/533d1ece-341b-4b45-b5fa-b10ca202f670)
-![Image](https://github.com/user-attachments/assets/399f95d7-4749-4ff7-a671-2d467896f547)
-![Image](https://github.com/user-attachments/assets/f9dfec2c-f753-4031-a622-93b014fe9e25)
-![Image](https://github.com/user-attachments/assets/6c7b3a28-7c47-4918-870d-03dbcd4012d2)
+![Image](https://github.com/user-attachments/assets/6e5fd9bf-edbc-4ccc-becb-1808e1a5cb5b)
+![Image](https://github.com/user-attachments/assets/3f3287fa-288f-40f7-a07e-2498177dfce5)
+![Image](https://github.com/user-attachments/assets/15cf4c9d-2afb-4ba2-802a-42e7ba33c8ad)
+![Image](https://github.com/user-attachments/assets/057ec2e9-08cf-40cf-b0de-7b63b1aa2d59)
+![Image](https://github.com/user-attachments/assets/e1d38f1f-e53b-4c37-84cf-4fbe01182438)
+![Image](https://github.com/user-attachments/assets/e561037a-d617-43a2-8050-e18ad924126f)
+![Image](https://github.com/user-attachments/assets/c3ed2974-2612-475c-a44f-41253d0ffe96)
+![Image](https://github.com/user-attachments/assets/d2deb95f-b7ab-40ed-a24e-b10d14d4316b)
+![Image](https://github.com/user-attachments/assets/8d313174-5d4a-4dc9-b716-c9f45543507d)
+![Image](https://github.com/user-attachments/assets/0e2263be-4274-4108-a27d-b83ebcef559c)
+![Image](https://github.com/user-attachments/assets/91bdfe3f-6c38-4fbf-9113-b45486473d1a)
+![Image](https://github.com/user-attachments/assets/b343c660-ce77-43da-a407-76072056cf8a)
+![Image](https://github.com/user-attachments/assets/dc14d0b7-31a0-42ac-945f-dcfb9f3dff08)
+![Image](https://github.com/user-attachments/assets/2670305f-eb2d-436a-9ecf-b6f4b817382b)
+![Image](https://github.com/user-attachments/assets/f9b6d904-ce10-4716-856d-79ef7cee56a7)
 
 
 ## 🛠️ Tech Stack
