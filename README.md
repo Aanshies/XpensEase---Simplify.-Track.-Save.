@@ -20,38 +20,24 @@
 
 ## 🖼️ App Screenshots
 
-> These give a quick visual walkthrough of what XpenseEase offers. *(Upload these in a `screenshots/` folder in your repo)*
+These give a quick visual walkthrough of what XpenseEase offers.
 
-<table>
-  <tr>
-    <td align="center"><strong>🔐 Registration</strong></td>
-    <td align="center"><strong>🔐 Login Page</strong></td>
-    <td align="center"><strong>📊 Dashboard</strong></td>
-  </tr>
-  <tr>
-    <td><img src="![Image](https://github.com/user-attachments/assets/ab2eba45-c059-42b1-9871-5f0bbb58aa5c)" alt="Registration" width="300"/></td>
-    <td><img src="![Image](https://github.com/user-attachments/assets/650ae6b2-a138-46f9-989e-c474c06bb6d1)" alt="Login Page" width="300"/></td>
-    <td><img src="![Image](https://github.com/user-attachments/assets/4242fc95-7f46-46e6-b158-907d91b77d82)" alt="Dashboard" width="300"/></td>
-  </tr>
-  <tr>
-    <td align="center"><strong>💸 Add Expense</strong></td>
-    <td align="center"><strong>📅 Calendar View</strong></td>
-  </tr>
-  <tr>
-    <td><img src="screenshots/add-expense.png" alt="Add Expense" width="300"/></td>
-    <td><img src="screenshots/calendar.png" alt="Calendar" width="300"/></td>
-  </tr>
-  <tr>
-    <td align="center"><strong>🗣️ Voice Input</strong></td>
-    <td align="center"><strong>📈 Visual Report</strong></td>
-  </tr>
-  <tr>
-    <td><img src="screenshots/voice.png" alt="Voice Input" width="300"/></td>
-    <td><img src="screenshots/report.png" alt="Visual Report" width="300"/></td>
-  </tr>
-</table>
+![Image](https://github.com/user-attachments/assets/3f9ec883-0466-4542-8a08-241439739469)
+![Image](https://github.com/user-attachments/assets/88ace269-c4fe-4358-870d-0e7624805352)
+![Image](https://github.com/user-attachments/assets/0c986b22-39e8-4c15-b220-ee658cfc0517)
+![Image](https://github.com/user-attachments/assets/472efbbc-e923-43fa-9123-0d4efe0ca8b3)
+![Image](https://github.com/user-attachments/assets/603b0078-ba3c-4c06-97d8-ec2839d88e57)
+![Image](https://github.com/user-attachments/assets/80070b87-334e-43a3-a2e9-580d66ebb403)
+![Image](https://github.com/user-attachments/assets/62628dfd-65b8-4e89-8e78-a45f44201941)
+![Image](https://github.com/user-attachments/assets/82845473-d4a9-4fce-b7d1-3c410418c1a8)
+![Image](https://github.com/user-attachments/assets/7967969d-f5c5-4849-a281-42450a4627de)
+![Image](https://github.com/user-attachments/assets/d990a9c2-17f7-4ead-b725-b00b0e03fe43)
+![Image](https://github.com/user-attachments/assets/e16be9c3-8a98-4656-ab8d-64d82b04b796)
+![Image](https://github.com/user-attachments/assets/533d1ece-341b-4b45-b5fa-b10ca202f670)
+![Image](https://github.com/user-attachments/assets/399f95d7-4749-4ff7-a671-2d467896f547)
+![Image](https://github.com/user-attachments/assets/f9dfec2c-f753-4031-a622-93b014fe9e25)
+![Image](https://github.com/user-attachments/assets/6c7b3a28-7c47-4918-870d-03dbcd4012d2)
 
----
 
 ## 🛠️ Tech Stack
 
