@@ -5,7 +5,7 @@ const cors = require('cors');
 const jwt = require('jsonwebtoken');
 const User = require('./models/User');
 
-
+console.log("Connecting to:", process.env.MONGODB_URI);
 
 const app = express();
 
